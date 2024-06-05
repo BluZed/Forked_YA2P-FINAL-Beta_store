@@ -27,6 +27,7 @@ document.getElementById("btn_load_textinput").onclick = () => {
 document.getElementById("btn_load_lastSave").onclick = () => {
     game.storage.load()
 }
+window.game = game
 
 
 async function startGame() {
