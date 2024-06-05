@@ -6,29 +6,16 @@ import { Game } from "./imports/import.js"
 
 
 document.getElementsByTagName("body")[0].style.cursor = "none";
-const game = new Game(this)
-const perfectFrameTime = 1000 / 60;
-var fps = 0
-let deltaTime = 0;
-let lastTimestamp = 0;
-let lastFrameMenu = true
-
-let msPrev = window.performance.now()
-const targetFPS = 60
-const msPerFrame = 1000 / targetFPS
-
-const saveTabEl = document.getElementById("tab-bg-closer")
-let open_savetab = false;
-saveTabEl.onclick = () => { saveTabEl.style.display = "none" }
-document.getElementById("save-manager-tab").onclick = (e) => { e.stopPropagation() }
-document.getElementById("btn_load_textinput").onclick = () => {
-    game.storage.load(document.getElementById("save_textinput").value || true)
-}
-document.getElementById("btn_load_lastSave").onclick = () => {
-    game.storage.load()
-}
-window.game = game
-
+    const game = new Game(this)
+    const perfectFrameTime = 1000 / 60;
+    var fps = 0
+    let deltaTime = 0;
+    let lastTimestamp = 0;
+    let lastFrameMenu = true
+    
+    let msPrev = window.performance.now()
+    const targetFPS = 60
+    const msPerFrame = 1000 / targetFPS
 
 async function startGame() {
     if (localStorage) { game.storage.accessible = false } else { game.storage.accessible = true }
