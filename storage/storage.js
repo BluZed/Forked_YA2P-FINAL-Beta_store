@@ -93,8 +93,13 @@ export class Storage{
         console.log("save") 
     }
 
-    async load() {
-        var loadData = await navigator.clipboard.readText()
+    async load(_loadData) {
+        if(!game.menu.pause){ return }
+        var loadData = _loadData || (window.localStorage.getItem("game_lastSave") || await navigator.clipboard.readText())
+        if(!loadData && _loadData != true){
+            console.log("No save data present.")
+            return
+        }
         console.log(loadData)
         var useData = loadData.split('\n')
         console.log(useData[1]) 
