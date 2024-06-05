@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <link rel="icon" type="image/x-icon"
-    href="https://raw.githubusercontent.com/loglot/Yet-Another-Collectathon/main/logo.ico">
-<title>Yet Another 2d Platformer</title> 
+  href="https://raw.githubusercontent.com/loglot/Yet-Another-Collectathon/main/logo.ico">
+<title>Yet Another 2d Platformer</title>
 <style>
   * {
     padding: 0;
@@ -9,8 +9,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
   }
+
   canvas {
     background: #5555ff;
     display: block;
@@ -23,39 +24,137 @@
 <body style="background-color:rgb(0, 0, 0);"></body>
 
 
-  <!----> <canvas id="game_screen" width="2514" height="1377">
-    This Game Requires The HTML5 Canvas, And Javascript To Function
-  </canvas> <!---->
+<!----> <canvas id="game_screen" width="2514" height="1377">
+  This Game Requires The HTML5 Canvas, And Javascript To Function
+</canvas> <!---->
 
 
-    <canvas id="balls" width="2514" height="1377"></canvas>
- 
-  
-  <div class = "a">
-    <canvas id="PostProcessing" width="2514" height="1377"></canvas>
+<canvas id="balls" width="2514" height="1377"></canvas>
+
+
+<div class="a">
+  <canvas id="PostProcessing" width="2514" height="1377"></canvas>
+</div>
+
+<canvas id="UI" width="2514" height="1377"></canvas>
+
+<!--<div id="settings-btn">&#9881;</div>-->
+<div id="tab-bg-closer" style="display: none;">
+  <div id="save-manager-tab">
+    <input id="save_textinput" type="text" placeholder="Enter save data">
+    <button class="save-tab-btn" id="btn_load_textinput">Load</button>
+    <button class="save-tab-btn" id="btn_load_lastSave">Load Last Save</button>
+    <div id="lastSave-info">No last save</div>
   </div>
+</div>
 
-  <canvas id="UI" width="2514" height="1377"></canvas>
 
-  <style>
-    #balls {
-      background: rgba(0, 0, 0, 0);
-      display: block;
-      margin: 0 auto; 
-    }
-    #PostProcessing {
-      background: rgba(0, 0, 0, 0);
-      display: block;
-      margin: 0 auto; 
-    }
-    #UI {
-      background: rgba(0, 0, 0, 0);
-      display: block;
-      margin: 0 auto; 
-    }
-    .a {
-      display: block;
-      filter: blur(30px)
-    }
-    </style>
+<style>
+  html,
+  body {
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  #balls {
+    background: rgba(0, 0, 0, 0);
+    display: block;
+    margin: 0 auto;
+  }
+
+  #PostProcessing {
+    background: rgba(0, 0, 0, 0);
+    display: block;
+    margin: 0 auto;
+  }
+
+  #UI {
+    background: rgba(0, 0, 0, 0);
+    display: block;
+    margin: 0 auto;
+  }
+
+  .a {
+    display: block;
+    filter: blur(30px)
+  }
+  
+  #save-manager-tab {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: none !important;
+    width: 40vw;
+    height: 30vh;
+    margin: auto;
+    box-shadow: 1px 1px 1rem black;
+    background-color: rgb(19, 19, 19);
+    z-index: 999;
+  }
+
+  #save_textinput {
+    width: 30vw;
+    height: 4vh;
+    padding: 0.2rem;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 0.2rem;
+    font-family: sans-serif;
+    top: 4vh;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: none;
+    outline: none;
+  }
+
+  .save-tab-btn {
+    position: unset;
+    transform: none;
+    margin: auto;
+    width: 15vw;
+    height: 6vh;
+    border-radius: 0.2rem;
+    border: 1px solid #ffffff69;
+    background: #ffffff14;
+    color: white;
+    cursor: pointer;
+  }
+  .save-tab-btn:hover {
+    background: transparent;
+  }
+
+  #lastSave-info {
+    position: absolute;
+    bottom: 3vh;
+    transform: none;
+    left: 0;
+    right: 0;
+    top: auto;
+    margin: auto;
+    width: fit-content;
+    color: white;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  #tab-bg-closer {
+    transform: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000e6;
+    cursor: default;
+  }
+</style>
 <script type="module" src="main.js"></script>

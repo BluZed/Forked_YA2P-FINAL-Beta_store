@@ -200,6 +200,7 @@ export class GameDisplayer {
     drawText() { 
         this.drawUtils.Text("saved", 1100, 100, `rgba(0,0,0,${this.game.storage.saveAlpha})`, `rgba(255,255,255,${this.game.storage.saveAlpha})`)
         this.drawUtils.Text("loaded", 1100, 100, `rgba(0,0,0,${this.game.storage.loadAlpha})`, `rgba(255,255,255,${this.game.storage.loadAlpha})`)
+        this.drawUtils.Text("cleared", 1100, 100, `rgba(0,0,0,${this.game.storage.clearAlpha})`, `rgba(255,255,255,${this.game.storage.clearAlpha})`)
     }
     
     // don't alter this, just ignore it
