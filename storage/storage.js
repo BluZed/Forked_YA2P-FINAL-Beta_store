@@ -7,6 +7,7 @@ export class Storage{
 
     saveAlpha = 0
     loadAlpha = 0
+    clearAlpha = 0
 
     constructor(game) {
         this.game = game
@@ -39,6 +40,7 @@ export class Storage{
             if(this.game.keyManager.wasKeyJustPressed("KeyC")){
                 this.saveAlpha = 0
                 this.loadAlpha = 0
+                this.clearAlpha = 0
                 this.Data = this.setData()
                 console.log(this.Data)
                 this.save()
@@ -49,17 +51,26 @@ export class Storage{
             if(this.game.keyManager.wasKeyJustPressed("KeyV")){
                 this.saveAlpha = 0
                 this.loadAlpha = 0
+                this.clearAlpha = 0
                 this.load()
                 this.loadAlpha = 2
             }
+            if(this.game.keyManager.wasKeyJustPressed("KeyX")){
+                this.saveAlpha = 0
+                this.loadAlpha = 0
+                this.clearAlpha = 0
+                this.clear()
+                this.clearAlpha = 2
+            }
         }
         this.saveAlpha -= .05
+        this.clearAlpha -= .05
         this.loadAlpha -= .05
     }
 
     async save() {
         this.Data = this.setData()
-        await navigator.clipboard.writeText(
+        const dataToSave = (
             Math.floor(this.Data.x)+ "\n"+
             Math.floor(this.Data.y)+ "\n"+
             this.Data.hook+ "\n"+
@@ -72,11 +83,22 @@ export class Storage{
             this.Data.targetMinRad+ "\n"+
             this.Data.targetMaxRad+ "\n"
         )
+
+        window.localStorage.setItem("game_lastSave", dataToSave)
+        const date = new Date()
+        let tstr = date.toTimeString()
+        window.localStorage.setItem("game_lastSaveTime", date.toDateString() +"<br>"+ tstr.substring(0, tstr.indexOf("(")-1))
+        await navigator.clipboard.writeText(dataToSave)
+
         console.log("save") 
     }
 
-    async load() {
-        var loadData = await navigator.clipboard.readText()
+    async load(_loadData) {
+        var loadData = _loadData ? _loadData : (window.localStorage.getItem("game_lastSave") || await navigator.clipboard.readText())
+        if(!loadData && _loadData != true){
+            console.log("No save data present.")
+            return
+        }
         console.log(loadData)
         var useData = loadData.split('\n')
         console.log(useData[1]) 
@@ -96,6 +118,11 @@ export class Storage{
         this.game.gameDisplayer.gradMaxTarget  = Number(useData[10])
 
         console.log(this.Save)
+    }
+
+    async clear() {
+        window.localStorage.removeItem("game_lastSave")
+        window.localStorage.removeItem("game_lastSaveTime")
     }
 }
 
